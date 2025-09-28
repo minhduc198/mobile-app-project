@@ -1,17 +1,24 @@
 package com.mobile.openlibraryapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.view.GravityCompat;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.SearchView;
 import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -24,36 +31,57 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookAdapter adapter;
     private List<Book> bookList = new ArrayList<>();
-
     private OkHttpClient client = new OkHttpClient();
+
+    private DrawerLayout drawerLayout; // DrawerLayout để mở/đóng menu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        searchView = findViewById(R.id.searchView);
+
+        // Ánh xạ DrawerLayout (phải có trong activity_main.xml)
+        drawerLayout = findViewById(R.id.drawerLayout);
+
+        // Ánh xạ view tìm sách
+//        searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                fetchBooks(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.length() > 2) {
-                    fetchBooks(newText);
-                }
-                return false;
-            }
-        });
+        // Bắt sự kiện Search
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                fetchBooks(query);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (newText.length() > 2) {
+//                    fetchBooks(newText);
+//                }
+//                return false;
+//            }
+//        });
     }
 
+    // Hàm public để HeaderFragment gọi mở Drawer
+    public void openRightDrawer() {
+        if (drawerLayout != null) {
+            drawerLayout.openDrawer(GravityCompat.END);
+        }
+    }
+
+    public void closeRightDrawer() {
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END);
+        }
+    }
+
+    // ---------------- API ----------------
     private void fetchBooks(String query) {
         String url = "https://openlibrary.org/search.json?q=" + query;
 
@@ -80,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 try {
-                    // Đọc body chỉ 1 lần
                     String bodyString = response.body().string();
                     Log.d("API_RESULT", "Raw JSON: " + bodyString);
 
@@ -104,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         Log.d("API_RESULT", "Số sách tìm thấy: " + bookList.size());
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this, "Tìm thấy " + bookList.size() + " sách", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,
+                                "Tìm thấy " + bookList.size() + " sách",
+                                Toast.LENGTH_SHORT).show();
                     });
 
                 } catch (Exception e) {
@@ -112,5 +141,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // ---------------- Ẩn search box khi click ra ngoài ----------------
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            HeaderFragment headerFragment = (HeaderFragment)
+                    getSupportFragmentManager().findFragmentById(R.id.headerFragment);
+            if (headerFragment != null) {
+                headerFragment.hideSearchBoxIfNeeded();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

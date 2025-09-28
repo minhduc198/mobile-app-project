@@ -6,12 +6,21 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Nhập tên sách..."
         android:iconifiedByDefault="false" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_footer"
+        android:name="com.mobile.openlibraryapp.FooterFragment"
+        android:id="@+id/footer"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

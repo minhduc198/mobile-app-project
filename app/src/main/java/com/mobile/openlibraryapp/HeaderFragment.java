@@ -1,10 +1,11 @@
 package com.mobile.openlibraryapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -34,20 +35,9 @@ public class HeaderFragment extends Fragment {
 
         // Bấm icon menu -> mở Drawer menu bên phải
         btnMenu.setOnClickListener(v -> {
-            if (getActivity() instanceof HeaderActivity) {
-                HeaderActivity.openRightMenu(); // gọi hàm static trong HeaderActivity
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openRightDrawer();
             }
-        });
-
-        // Bấm ra ngoài để đóng search box
-        view.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (searchBox.getVisibility() == View.VISIBLE) {
-                    hideSearchBox();
-                    return true;
-                }
-            }
-            return false;
         });
 
         return view;
@@ -69,12 +59,12 @@ public class HeaderFragment extends Fragment {
                 .setDuration(300)
                 .start();
 
-        // Khi mất focus (click ra ngoài) -> đóng search
-        searchBox.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                hideSearchBox();
-            }
-        });
+        // Hiện bàn phím
+        InputMethodManager imm = (InputMethodManager) requireContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 
     private void hideSearchBox() {
@@ -90,5 +80,19 @@ public class HeaderFragment extends Fragment {
                 .translationX(0)
                 .setDuration(300)
                 .start();
+
+        // Ẩn bàn phím
+        InputMethodManager imm = (InputMethodManager) requireContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+        }
+    }
+
+    // Public để MainActivity gọi khi click ra ngoài
+    public void hideSearchBoxIfNeeded() {
+        if (searchBox != null && searchBox.getVisibility() == View.VISIBLE) {
+            hideSearchBox();
+        }
     }
 }

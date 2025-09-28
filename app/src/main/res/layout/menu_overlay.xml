@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FAF9F6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Open Library"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="12dp" />
+
+        <!-- Login / Signup buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Log In" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btnSignup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sign Up" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDD"
+            android:layout_marginVertical="12dp" />
+
+        <!-- Browse Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Browse"
+            android:textStyle="bold"
+            android:paddingVertical="8dp" />
+
+        <TextView
+            android:id="@+id/itemSubjects"
+            style="@style/MenuItemStyle"
+            android:text="Subjects" />
+
+        <TextView
+            android:id="@+id/itemTrending"
+            style="@style/MenuItemStyle"
+            android:text="Trending" />
+
+        <TextView
+            android:id="@+id/itemLibraryExplorer"
+            style="@style/MenuItemStyle"
+            android:text="Library Explorer" />
+
+        <TextView
+            android:id="@+id/itemLists"
+            style="@style/MenuItemStyle"
+            android:text="Lists" />
+
+        <TextView
+            android:id="@+id/itemCollections"
+            style="@style/MenuItemStyle"
+            android:text="Collections" />
+
+        <TextView
+            android:id="@+id/itemK12"
+            style="@style/MenuItemStyle"
+            android:text="K-12 Student Library" />
+
+        <TextView
+            android:id="@+id/itemBookTalks"
+            style="@style/MenuItemStyle"
+            android:text="Book Talks" />
+
+        <TextView
+            android:id="@+id/itemRandomBook"
+            style="@style/MenuItemStyle"
+            android:text="Random Book" />
+
+        <TextView
+            android:id="@+id/itemAdvancedSearch"
+            style="@style/MenuItemStyle"
+            android:text="Advanced Search" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDD"
+            android:layout_marginVertical="12dp" />
+
+        <!-- Contribute Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contribute"
+            android:textStyle="bold"
+            android:paddingVertical="8dp" />
+
+        <TextView
+            android:id="@+id/itemAddBook"
+            style="@style/MenuItemStyle"
+            android:text="Add a Book" />
+
+        <TextView
+            android:id="@+id/itemRecentEdits"
+            style="@style/MenuItemStyle"
+            android:text="Recent Community Edits" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDD"
+            android:layout_marginVertical="12dp" />
+
+        <!-- Resources Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resources"
+            android:textStyle="bold"
+            android:paddingVertical="8dp" />
+
+        <TextView
+            android:id="@+id/itemHelp"
+            style="@style/MenuItemStyle"
+            android:text="Help Support" />
+
+        <TextView
+            android:id="@+id/itemDevCenter"
+            style="@style/MenuItemStyle"
+            android:text="Developer Center" />
+
+    </LinearLayout>
+</ScrollView>

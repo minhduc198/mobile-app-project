@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#F2E7C9"
+    android:padding="16dp">
+
+    <!-- Open Library -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/h1"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/linkVision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_vison"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkVolunteer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_volunteer"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkPartner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_partner_with_us"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkCareers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_careers"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_blog"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkTOS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_terms_of_service"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkDonate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_donate"
+        style="@style/FooterLink" />
+
+    <!-- Discover -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/h2"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/linkHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_home"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_books"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkAuthors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_authors"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkSubjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_subjects"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkCollections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_collections"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkAdvancedSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_advanced_search"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkReturnToTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_return_to_top"
+        style="@style/FooterLink" />
+
+    <!-- Develop -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/h3"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/linkDevCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_developer_center"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkApiDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_api_documentation"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkDataDumps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_bulk_data_dumps"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkBots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_writing_bots"
+        style="@style/FooterLink" />
+
+    <!-- Help -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/h4"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/linkHelpCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_help_center"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkContactUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_contact_us"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkSuggestEdits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_suggesting_edits"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_add_a_book"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkReleaseNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_release_notes"
+        style="@style/FooterLink" />
+
+    <!-- Languages -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/h5"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/linkEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_english"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkDeutsch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_deutsch"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkSpanish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_espa_ol"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkFrench"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_fran_ais"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkItalian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_italiano"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkChinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_chinese"
+        style="@style/FooterLink" />
+
+    <TextView
+        android:id="@+id/linkJapanese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/link_japanese"
+        style="@style/FooterLink" />
+
+    <!-- Bottom note -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/note"
+        android:textSize="12sp"
+        android:textColor="#666" />
+
+</LinearLayout>

@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private BookAdapter adapter;
     private List<Book> bookList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
-
     private DrawerLayout drawerLayout; // DrawerLayout để mở/đóng menu
 
     @Override
@@ -40,32 +38,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Ánh xạ DrawerLayout (phải có trong activity_main.xml)
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Ánh xạ view tìm sách
-//        searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);
 
-        // Bắt sự kiện Search
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                fetchBooks(query);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (newText.length() > 2) {
-//                    fetchBooks(newText);
-//                }
-//                return false;
-//            }
-//        });
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                fetchBooks(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() > 2) {
+                    fetchBooks(newText);
+                }
+                return false;
+            }
+        });
     }
 
     // Hàm public để HeaderFragment gọi mở Drawer
@@ -82,9 +77,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ---------------- API ----------------
-    private void fetchBooks(String query) {
-        String url = "https://openlibrary.org/search.json?q=" + query;
+    public void fetchBooks(String query) {
+        try {
+            query = java.net.URLEncoder.encode(query, "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        String url = "https://openlibrary.org/search.json?q=" + query;
         Log.d("API_CALL", "Fetching: " + url);
 
         Request request = new Request.Builder()
@@ -101,15 +101,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    Log.e("API_ERROR", "Unexpected code " + response);
+            public void onResponse(Call call, Response response) {
+                if (!response.isSuccessful() || response.body() == null) {
+                    Log.e("API_ERROR", "Response error or empty body");
                     return;
                 }
 
                 try {
                     String bodyString = response.body().string();
-                    Log.d("API_RESULT", "Raw JSON: " + bodyString);
+                    Log.d("API_RESULT", "Raw JSON (first 300): " +
+                            bodyString.substring(0, Math.min(300, bodyString.length())));
 
                     JSONObject jsonObject = new JSONObject(bodyString);
                     JSONArray docs = jsonObject.optJSONArray("docs");
@@ -117,11 +118,13 @@ public class MainActivity extends AppCompatActivity {
                     bookList.clear();
                     if (docs != null) {
                         for (int i = 0; i < docs.length(); i++) {
-                            JSONObject bookObj = docs.getJSONObject(i);
+                            JSONObject bookObj = docs.optJSONObject(i);
+                            if (bookObj == null) continue;
+
                             String title = bookObj.optString("title", "Không có tiêu đề");
                             JSONArray authors = bookObj.optJSONArray("author_name");
                             String author = (authors != null && authors.length() > 0)
-                                    ? authors.getString(0)
+                                    ? authors.optString(0, "Không rõ")
                                     : "Không rõ";
 
                             bookList.add(new Book(title, author));
@@ -129,19 +132,20 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     runOnUiThread(() -> {
-                        Log.d("API_RESULT", "Số sách tìm thấy: " + bookList.size());
+                        Log.d("UI_UPDATE", "Updating RecyclerView with " + bookList.size() + " items");
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this,
-                                "Tìm thấy " + bookList.size() + " sách",
-                                Toast.LENGTH_SHORT).show();
                     });
+
 
                 } catch (Exception e) {
                     Log.e("API_ERROR", "Parse error", e);
+                } finally {
+                    response.close();
                 }
             }
         });
     }
+
 
     // ---------------- Ẩn search box khi click ra ngoài ----------------
     @Override

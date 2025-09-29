@@ -19,6 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Thanh tìm kiếm -->
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Nhập tên sách..."
+            android:iconifiedByDefault="false" />
+
         <!-- Nav bar -->
         <fragment
             android:id="@+id/navFragment"
@@ -26,20 +34,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Footer -->
-        <fragment
-            android:id="@+id/footer"
-            android:name="com.mobile.openlibraryapp.FooterFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_footer" />
-
         <!-- RecyclerView hiển thị danh sách -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
+        <!-- Footer
+        <fragment
+            android:id="@+id/footer"
+            android:name="com.mobile.openlibraryapp.FooterFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_footer" />
+-->
     </LinearLayout>
 
     <!-- Drawer Menu (trượt từ bên phải) -->

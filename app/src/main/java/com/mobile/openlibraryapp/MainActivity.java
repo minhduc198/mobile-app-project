@@ -9,7 +9,7 @@ import androidx.core.view.GravityCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.SearchView;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -27,51 +27,37 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SearchView searchView;
+    private static final String TAG = "MainActivity";
+
     private RecyclerView recyclerView;
     private BookAdapter adapter;
     private List<Book> bookList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
 
-    private DrawerLayout drawerLayout; // DrawerLayout để mở/đóng menu
+    private DrawerLayout drawerLayout;
+    private Call currentCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Ánh xạ DrawerLayout (phải có trong activity_main.xml)
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Ánh xạ view tìm sách
-//        searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);
-
-        // Bắt sự kiện Search
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                fetchBooks(query);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (newText.length() > 2) {
-//                    fetchBooks(newText);
-//                }
-//                return false;
-//            }
-//        });
     }
 
-    // Hàm public để HeaderFragment gọi mở Drawer
     public void openRightDrawer() {
         if (drawerLayout != null) {
             drawerLayout.openDrawer(GravityCompat.END);
+        }
+        HeaderFragment headerFragment = (HeaderFragment)
+                getSupportFragmentManager().findFragmentById(R.id.headerFragment);
+        if (headerFragment != null) {
+            headerFragment.hideSearchBoxIfNeeded();
         }
     }
 
@@ -81,40 +67,57 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ---------------- API ----------------
-    private void fetchBooks(String query) {
-        String url = "https://openlibrary.org/search.json?q=" + query;
+    // -Call API
+    public synchronized void fetchBooks(final String query) {
+        if (query == null) return;
+        final String trimmed = query.trim();
+        if (trimmed.isEmpty()) {
+            runOnUiThread(() -> {
+                bookList.clear();
+                adapter.notifyDataSetChanged();
+            });
+            return;
+        }
 
-        Log.d("API_CALL", "Fetching: " + url);
+        final String url = "https://openlibrary.org/search.json?q=" + trimmed.replace(" ", "+");
+        Log.d(TAG, "Fetching: " + url);
 
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+        if (currentCall != null && !currentCall.isCanceled()) {
+            currentCall.cancel();
+        }
 
-        client.newCall(request).enqueue(new Callback() {
+        Request request = new Request.Builder().url(url).build();
+
+        currentCall = client.newCall(request);
+        currentCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                if (call.isCanceled()) {
+                    Log.d(TAG, "Request cancelled: " + trimmed);
+                    return;
+                }
+                Log.e(TAG, "Request failed", e);
                 runOnUiThread(() ->
                         Toast.makeText(MainActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show()
                 );
-                Log.e("API_ERROR", "Request failed", e);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    Log.e("API_ERROR", "Unexpected code " + response);
+                    Log.e(TAG, "Unexpected code " + response);
+                    response.close();
                     return;
                 }
 
                 try {
                     String bodyString = response.body().string();
-                    Log.d("API_RESULT", "Raw JSON: " + bodyString);
+                    response.close();
 
                     JSONObject jsonObject = new JSONObject(bodyString);
                     JSONArray docs = jsonObject.optJSONArray("docs");
 
-                    bookList.clear();
+                    final List<Book> newList = new ArrayList<>();
                     if (docs != null) {
                         for (int i = 0; i < docs.length(); i++) {
                             JSONObject bookObj = docs.getJSONObject(i);
@@ -124,33 +127,47 @@ public class MainActivity extends AppCompatActivity {
                                     ? authors.getString(0)
                                     : "Không rõ";
 
-                            bookList.add(new Book(title, author));
+                            newList.add(new Book(title, author));
                         }
                     }
 
                     runOnUiThread(() -> {
-                        Log.d("API_RESULT", "Số sách tìm thấy: " + bookList.size());
+                        bookList.clear();
+                        bookList.addAll(newList);
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this,
-                                "Tìm thấy " + bookList.size() + " sách",
-                                Toast.LENGTH_SHORT).show();
                     });
 
                 } catch (Exception e) {
-                    Log.e("API_ERROR", "Parse error", e);
+                    Log.e(TAG, "Parse error", e);
                 }
             }
         });
     }
 
-    // ---------------- Ẩn search box khi click ra ngoài ----------------
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             HeaderFragment headerFragment = (HeaderFragment)
                     getSupportFragmentManager().findFragmentById(R.id.headerFragment);
             if (headerFragment != null) {
-                headerFragment.hideSearchBoxIfNeeded();
+                View searchBox = headerFragment.getSearchBoxView();
+                if (searchBox != null && searchBox.getVisibility() == View.VISIBLE) {
+                    int[] loc = new int[2];
+                    searchBox.getLocationOnScreen(loc);
+                    float x = ev.getRawX();
+                    float y = ev.getRawY();
+
+                    android.graphics.Rect rect = new android.graphics.Rect(
+                            loc[0],
+                            loc[1],
+                            loc[0] + searchBox.getWidth(),
+                            loc[1] + searchBox.getHeight()
+                    );
+
+                    if (!rect.contains((int) x, (int) y)) {
+                        headerFragment.hideSearchBoxIfNeeded();
+                    }
+                }
             }
         }
         return super.dispatchTouchEvent(ev);

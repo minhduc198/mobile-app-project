@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Open Library -->
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -43,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Discover -->
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -98,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Help -->
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -124,7 +121,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Languages -->
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -156,7 +152,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Bottom note -->
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

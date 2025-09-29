@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +19,6 @@
             android:textSize="18sp"
             android:paddingBottom="12dp" />
 
-        <!-- Login / Signup buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,14 +44,12 @@
                 android:text="Sign Up" />
         </LinearLayout>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#DDD"
             android:layout_marginVertical="12dp" />
 
-        <!-- Browse Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,14 +102,12 @@
             style="@style/MenuItemStyle"
             android:text="Advanced Search" />
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#DDD"
             android:layout_marginVertical="12dp" />
 
-        <!-- Contribute Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,14 +125,12 @@
             style="@style/MenuItemStyle"
             android:text="Recent Community Edits" />
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#DDD"
             android:layout_marginVertical="12dp" />
 
-        <!-- Resources Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

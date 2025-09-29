@@ -22,13 +22,12 @@ public class NavFragment extends Fragment {
         TextView myBooks = view.findViewById(R.id.tvMyBooks);
         TextView browse = view.findViewById(R.id.tvBrowse);
 
-        myBooks.setOnClickListener(v -> {
-            // TODO: mở danh sách sách của tôi
-        });
-
-        browse.setOnClickListener(v -> {
-            // TODO: mở danh sách Browse
-        });
+        // Need to add more func
+//        myBooks.setOnClickListener(v -> {
+//        });
+//
+//        browse.setOnClickListener(v -> {
+//        });
 
         return view;
     }

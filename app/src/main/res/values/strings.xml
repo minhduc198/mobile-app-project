@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">openlibraryapp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category1">Trending Books</string>
+    <string name="category2">Classic Books</string>
+    <string name="category3">History Books</string>
+    <string name="category4">Magic Books</string>
 </resources>

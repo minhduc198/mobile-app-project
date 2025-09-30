@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">openlibraryapp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="h1">Open Library</string>
     <string name="link_vison">Vision</string>
     <string name="link_volunteer">Volunteer</string>
@@ -36,4 +40,5 @@
     <string name="link_chinese">中文</string>
     <string name="link_japanese">日本語</string>
     <string name="note">Open Library is an initiative of the Internet Archive, a 501(c)(3) non-profit, building a digital library of Internet sites and other cultural artifacts in digital form.</string>
+
 </resources>

@@ -21,7 +21,5 @@ public class Category {
     public List<Book1> getBooks() {
         return books;
     }
-
-public class Category {
-
 }
+

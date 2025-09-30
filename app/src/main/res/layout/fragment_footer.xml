@@ -21,24 +21,31 @@
             android:paddingBottom="8dp"/>
 
         <TextView android:text="@string/link_vison" style="@style/FooterLink"
+            android:id="@+id/linkVision"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_volunteer" style="@style/FooterLink"
+            android:id="@+id/linkVolunteer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_partner_with_us" style="@style/FooterLink"
+            android:id="@+id/linkPartnerWithUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_careers" style="@style/FooterLink"
+            android:id="@+id/linkCarrers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_blog" style="@style/FooterLink"
+            android:id="@+id/linkBlog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_terms_of_service" style="@style/FooterLink"
+            android:id="@+id/linkTermsOfService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView android:text="@string/link_donate" style="@style/FooterLink"
+            android:id="@+id/linkDonate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

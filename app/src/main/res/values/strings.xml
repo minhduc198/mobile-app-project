@@ -4,4 +4,45 @@
     <string name="category2">Classic Books</string>
     <string name="category3">History Books</string>
     <string name="category4">Magic Books</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="h1">Open Library</string>
+    <string name="link_vison">Vision</string>
+    <string name="link_volunteer">Volunteer</string>
+    <string name="link_partner_with_us">Partner With Us</string>
+    <string name="link_careers">Careers</string>
+    <string name="link_blog">Blog</string>
+    <string name="link_terms_of_service">Terms of Service</string>
+    <string name="link_donate">Donate</string>
+    <string name="h2">Discover</string>
+    <string name="link_home">Home</string>
+    <string name="link_books">Books</string>
+    <string name="link_authors">Authors</string>
+    <string name="link_subjects">Subjects</string>
+    <string name="link_collections">Collections</string>
+    <string name="link_advanced_search">Advanced Search</string>
+    <string name="link_return_to_top">Return to Top</string>
+    <string name="h3">Develop</string>
+    <string name="link_developer_center">Developer Center</string>
+    <string name="link_api_documentation">API Documentation</string>
+    <string name="link_bulk_data_dumps">Bulk Data Dumps</string>
+    <string name="link_writing_bots">Writing Bots</string>
+    <string name="h4">Help</string>
+    <string name="link_help_center">Help Center</string>
+    <string name="link_contact_us">Contact Us</string>
+    <string name="link_suggesting_edits">Suggesting Edits</string>
+    <string name="link_add_a_book">Add a Book</string>
+    <string name="link_release_notes">Release Notes</string>
+    <string name="h5">Languages</string>
+    <string name="link_english">English</string>
+    <string name="link_deutsch">Deutsch</string>
+    <string name="link_espa_ol">Español</string>
+    <string name="link_fran_ais">Français</string>
+    <string name="link_italiano">Italiano</string>
+    <string name="link_chinese">中文</string>
+    <string name="link_japanese">日本語</string>
+    <string name="note">Open Library is an initiative of the Internet Archive, a 501(c)(3) non-profit, building a digital library of Internet sites and other cultural artifacts in digital form.</string>
+
 </resources>

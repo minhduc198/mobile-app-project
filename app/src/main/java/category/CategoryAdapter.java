@@ -1,5 +1,6 @@
 package category;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,4 +74,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             recvBook = itemView.findViewById(R.id.recv_book);
         }
     }
+
+public class CategoryAdapter {
+
 }

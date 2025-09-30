@@ -25,11 +25,6 @@ import category.Category;
 import category.CategoryAdapter;
 
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recvCategory;
-    private CategoryAdapter categoryAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -52,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Book> bookList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
 
+    private RecyclerView recvCategory;
+    private CategoryAdapter categoryAdapter;
     private DrawerLayout drawerLayout;
     private Call currentCall;
 
@@ -61,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // Khởi tạo Category
         recvCategory = findViewById(R.id.recv_category);
         categoryAdapter = new CategoryAdapter(this);
 
@@ -70,10 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
         categoryAdapter.setData(getListCategory());
         recvCategory.setAdapter(categoryAdapter);
+
+        // Khởi tạo Drawer và RecyclerView cho Book
+        drawerLayout = findViewById(R.id.drawerLayout);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new BookAdapter(bookList);
+        recyclerView.setAdapter(adapter);
     }
 
     private List<Category> getListCategory() {
-        List<Category>listCategory = new ArrayList<>();
+        List<Category> listCategory = new ArrayList<>();
 
         List<Book1> listBook = new ArrayList<>();
         listBook.add(new Book1(R.drawable.book,"Read"));
@@ -83,25 +88,19 @@ public class MainActivity extends AppCompatActivity {
         listBook.add(new Book1(R.drawable.elsa,"Read"));
         listBook.add(new Book1(R.drawable.beautybeaste,"Locate"));
         listBook.add(new Book1(R.drawable.traindragon,"Read"));
-
         listBook.add(new Book1(R.drawable.harry,"Read"));
         listBook.add(new Book1(R.drawable.elsa,"Locate"));
         listBook.add(new Book1(R.drawable.beautybeaste,"Read"));
         listBook.add(new Book1(R.drawable.traindragon,"Locate"));
 
-        listCategory.add(new Category("Trending Books",listBook));
-        listCategory.add(new Category("Classic Books",listBook));
-        listCategory.add(new Category("History Books",listBook));
-        listCategory.add(new Category("Magic Books",listBook));
+        listCategory.add(new Category("Trending Books", listBook));
+        listCategory.add(new Category("Classic Books", listBook));
+        listCategory.add(new Category("History Books", listBook));
+        listCategory.add(new Category("Magic Books", listBook));
+
         return listCategory;
-
-        drawerLayout = findViewById(R.id.drawerLayout);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookAdapter(bookList);
-        recyclerView.setAdapter(adapter);
     }
+
 
     public void openRightDrawer() {
         if (drawerLayout != null) {

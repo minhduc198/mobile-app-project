@@ -1,18 +1,16 @@
 package category;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.openlibraryapp.R;
-
-import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -34,21 +32,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category,parent,false);
+    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_category, parent, false);
         return new CategoryViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(CategoryViewHolder holder,int position) {
+    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categoryL.get(position);
-        if(category == null) {
+        if (category == null) {
             return;
         }
 
         holder.nameCate.setText(category.getNameCate());
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext,RecyclerView.HORIZONTAL,false);
+        // setup horizontal RecyclerView cho list sách
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false);
         holder.recvBook.setLayoutManager(linearLayoutManager);
 
         BookAdapter1 bookAdapter = new BookAdapter1();
@@ -58,23 +59,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        if(categoryL != null) {
+        if (categoryL != null) {
             return categoryL.size();
         }
         return 0;
     }
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nameCate;
-        private RecyclerView recvBook;
-        public CategoryViewHolder(View itemView) {
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
+        private final TextView nameCate;
+        private final RecyclerView recvBook;
+
+        public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-
             nameCate = itemView.findViewById(R.id.name_cate);
             recvBook = itemView.findViewById(R.id.recv_book);
         }
     }
-
-public class CategoryAdapter {
-
 }

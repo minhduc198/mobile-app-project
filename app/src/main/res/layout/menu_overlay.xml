@@ -60,12 +60,16 @@
         <TextView
             android:id="@+id/itemSubjects"
             style="@style/MenuItemStyle"
-            android:text="Subjects" />
+            android:text="Subjects"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <TextView
             android:id="@+id/itemTrending"
             style="@style/MenuItemStyle"
-            android:text="Trending" />
+            android:text="Trending"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <TextView
             android:id="@+id/itemLibraryExplorer"

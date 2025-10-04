@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.core.view.GravityCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupDrawerListener();
+
         // Khởi tạo Category
         recvCategory = findViewById(R.id.recv_category);
         categoryAdapter = new CategoryAdapter(this);
@@ -75,6 +79,64 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void setupDrawerListener(){
+        // Khởi tạo các TextView trong menu
+        TextView itemSubjects = findViewById(R.id.itemSubjects);
+        TextView itemTrending = findViewById(R.id.itemTrending);
+        TextView itemLibraryExplorer = findViewById(R.id.itemLibraryExplorer);
+        TextView itemLists = findViewById(R.id.itemLists);
+        TextView itemCollections = findViewById(R.id.itemCollections);
+        TextView itemK12 = findViewById(R.id.itemK12);
+        TextView itemBookTalks = findViewById(R.id.itemBookTalks);
+        TextView itemRandomBook = findViewById(R.id.itemRandomBook);
+        TextView itemAdvancedSearch = findViewById(R.id.itemAdvancedSearch);
+        TextView itemAddBook = findViewById(R.id.itemAddBook);
+        TextView itemRecentEdits = findViewById(R.id.itemRecentEdits);
+        TextView itemHelp = findViewById(R.id.itemHelp);
+        TextView itemDevCenter = findViewById(R.id.itemDevCenter);
+
+        // Setup click cho các TextView
+        itemSubjects.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/subjects");
+        });
+        itemTrending.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/trending/now");
+        });
+        itemLibraryExplorer.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/explore");
+        });
+        itemLists.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/lists");
+        });
+        itemCollections.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/collections");
+        });
+        itemK12.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/collections/k-12");
+        });
+        itemBookTalks.setOnClickListener(v -> {
+            openWebPage("https://archive.org/details/booktalks");
+        });
+        itemRandomBook.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/random-book");
+        });
+        itemAdvancedSearch.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/advancedsearch");
+        });
+        itemAddBook.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/add-a-book");
+        });
+        itemRecentEdits.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/recent-community-edits");
+        });
+        itemHelp.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/help-support");
+        });
+        itemDevCenter.setOnClickListener(v -> {
+            openWebPage("https://openlibrary.org/developer-center");
+        });
     }
 
     private List<Category> getListCategory() {
@@ -224,5 +286,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+    private void openWebPage(String url) {
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
 }

@@ -24,10 +24,9 @@ public class FooterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout first
         View rootView = inflater.inflate(R.layout.fragment_footer, container, false);
 
-        // Find your TextView by ID
+        // Footer link
         TextView linkVision = rootView.findViewById(R.id.linkVision);
         TextView linkVolunteer = rootView.findViewById(R.id.linkVolunteer);
         TextView linkPartnerWithUs = rootView.findViewById(R.id.linkPartnerWithUs);
@@ -36,7 +35,7 @@ public class FooterFragment extends Fragment {
         TextView linkTermsOfService = rootView.findViewById(R.id.linkTermsOfService);
         TextView linkDonate = rootView.findViewById(R.id.linkDonate);
 
-        // Set Link for webview
+        // Webview for footer
         linkVision.setOnClickListener(v -> openWebPage("https://openlibrary.org/about"));
         linkVolunteer.setOnClickListener(v -> openWebPage("https://openlibrary.org/volunteer"));
         linkPartnerWithUs.setOnClickListener(v -> openWebPage("https://openlibrary.org/partner-with-us"));

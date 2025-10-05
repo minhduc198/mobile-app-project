@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6EC">
+
+    <LinearLayout
+        android:id="@+id/containerBrowse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnSubjects"
+            style="@style/BrowseItem"
+            android:text="Subjects" />
+
+        <TextView
+            android:id="@+id/btnTrending"
+            style="@style/BrowseItem"
+            android:text="Trending" />
+
+        <TextView
+            android:id="@+id/btnLibraryExplorer"
+            style="@style/BrowseItem"
+            android:text="Library Explorer" />
+
+        <TextView
+            android:id="@+id/btnLists"
+            style="@style/BrowseItem"
+            android:text="Lists" />
+
+        <TextView
+            android:id="@+id/btnCollections"
+            style="@style/BrowseItem"
+            android:text="Collections" />
+
+        <TextView
+            android:id="@+id/btnK12"
+            style="@style/BrowseItem"
+            android:text="K-12 Student Library" />
+
+        <TextView
+            android:id="@+id/btnBookTalks"
+            style="@style/BrowseItem"
+            android:text="Book Talks" />
+
+        <TextView
+            android:id="@+id/btnRandomBook"
+            style="@style/BrowseItem"
+            android:text="Random Book" />
+
+        <TextView
+            android:id="@+id/btnAdvancedSearch"
+            style="@style/BrowseItem"
+            android:text="Advanced Search" />
+
+    </LinearLayout>
+</ScrollView>

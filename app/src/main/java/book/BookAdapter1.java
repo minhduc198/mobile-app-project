@@ -1,5 +1,8 @@
 package book;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.openlibraryapp.R;
@@ -15,7 +20,12 @@ import java.util.List;
 
 public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHolder> {
 
+    private Context context;
     private List<Book1> books1;
+
+    public BookAdapter1(Context context) {
+        this.context = context;
+    }
 
     public void setData(List<Book1> list) {
         this.books1 = list;
@@ -34,8 +44,34 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
         Book1 book = books1.get(position);
         if (book == null) return;
 
-        // TODO: Gắn dữ liệu vào view (ví dụ: hiển thị hình ảnh, tiêu đề)
-        // holder.imageView.setImageResource(book.getImageResId());
+        holder.imageView.setImageResource(book.getResId());
+        holder.button.setText("READ");
+
+        View.OnClickListener openBookDetail = v -> {
+                BookDetailFragment fragment = new BookDetailFragment();
+
+        Bundle args = new Bundle();
+        args.putString("book_title", book.getTitle());
+        args.putString("book_author", book.getAuthor());
+        args.putInt("book_image", book.getResId());
+        fragment.setArguments(args);
+
+        View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container);
+        if (fragmentContainer != null) {
+            fragmentContainer.setVisibility(View.VISIBLE);
+        }
+
+        FragmentTransaction transaction = ((FragmentActivity) context)
+                .getSupportFragmentManager()
+                .beginTransaction();
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+         };
+
+        holder.button.setOnClickListener(openBookDetail);
+        holder.imageView.setOnClickListener(openBookDetail);
+
     }
 
     @Override
@@ -52,10 +88,8 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            // TODO: Tham chiếu đến view trong item_book1.xml
-            // imageView = itemView.findViewById(R.id.imageView);
-            // button = itemView.findViewById(R.id.button);
+            imageView = itemView.findViewById(R.id.img_book);
+            button = itemView.findViewById(R.id.button);
         }
     }
 }

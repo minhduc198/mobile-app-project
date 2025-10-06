@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import book.Book1;
+import book.BookAdapter1;
 import category.Category;
 import category.CategoryAdapter;
 
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookAdapter(bookList);
         recyclerView.setAdapter(adapter);
+
+        //Connect fragment BookDetail in MainActivity
+        BookAdapter1 adapter = new BookAdapter1(MainActivity.this);
     }
 
     private void setupDrawerListener(){
@@ -144,16 +148,16 @@ public class MainActivity extends AppCompatActivity {
 
         List<Book1> listBook = new ArrayList<>();
         listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.windwillow,"Locate"));
-        listBook.add(new Book1(R.drawable.snowhite,"Locate"));
-        listBook.add(new Book1(R.drawable.harry,"Read"));
-        listBook.add(new Book1(R.drawable.elsa,"Read"));
-        listBook.add(new Book1(R.drawable.beautybeaste,"Locate"));
-        listBook.add(new Book1(R.drawable.traindragon,"Read"));
-        listBook.add(new Book1(R.drawable.harry,"Read"));
-        listBook.add(new Book1(R.drawable.elsa,"Locate"));
-        listBook.add(new Book1(R.drawable.beautybeaste,"Read"));
-        listBook.add(new Book1(R.drawable.traindragon,"Locate"));
+        listBook.add(new Book1(R.drawable.book,"Have Read"));
+        listBook.add(new Book1(R.drawable.book,"Have Read"));
+        listBook.add(new Book1(R.drawable.book,"Read"));
+        listBook.add(new Book1(R.drawable.book,"Read"));
+        listBook.add(new Book1(R.drawable.book,"Have Read"));
+        listBook.add(new Book1(R.drawable.book,"Read"));
+        listBook.add(new Book1(R.drawable.book,"Read"));
+        listBook.add(new Book1(R.drawable.book,"Have Read"));
+        listBook.add(new Book1(R.drawable.book,"Read"));
+        listBook.add(new Book1(R.drawable.book,"Have Read"));
 
         listCategory.add(new Category("Trending Books", listBook));
         listCategory.add(new Category("Classic Books", listBook));

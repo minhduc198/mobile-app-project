@@ -52,7 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false);
         holder.recvBook.setLayoutManager(linearLayoutManager);
 
-        BookAdapter1 bookAdapter = new BookAdapter1();
+        BookAdapter1 bookAdapter = new BookAdapter1(mContext);
         bookAdapter.setData(category.getBooks());
         holder.recvBook.setAdapter(bookAdapter);
     }

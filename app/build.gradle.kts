@@ -44,4 +44,5 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.ramotion.foldingcell:folding-cell:1.2.3")
 }

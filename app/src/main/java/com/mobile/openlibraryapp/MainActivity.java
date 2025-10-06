@@ -8,16 +8,10 @@ import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +21,8 @@ import category.Category;
 import category.CategoryAdapter;
 
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -181,83 +165,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // -Call API
-    public synchronized void fetchBooks(final String query) {
-        if (query == null) return;
-        final String trimmed = query.trim();
-        if (trimmed.isEmpty()) {
-            runOnUiThread(() -> {
-                bookList.clear();
-                adapter.notifyDataSetChanged();
-            });
-            return;
-        }
 
-        final String url = "https://openlibrary.org/search.json?q=" + trimmed.replace(" ", "+");
-        Log.d(TAG, "Fetching: " + url);
-
-        if (currentCall != null && !currentCall.isCanceled()) {
-            currentCall.cancel();
-        }
-
-        Request request = new Request.Builder().url(url).build();
-
-        currentCall = client.newCall(request);
-        currentCall.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                if (call.isCanceled()) {
-                    Log.d(TAG, "Request cancelled: " + trimmed);
-                    return;
-                }
-                Log.e(TAG, "Request failed", e);
-                runOnUiThread(() ->
-                        Toast.makeText(MainActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show()
-                );
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    Log.e(TAG, "Unexpected code " + response);
-                    response.close();
-                    return;
-                }
-
-                try {
-                    String bodyString = response.body().string();
-                    response.close();
-
-                    JSONObject jsonObject = new JSONObject(bodyString);
-                    JSONArray docs = jsonObject.optJSONArray("docs");
-
-                    final List<Book> newList = new ArrayList<>();
-                    if (docs != null) {
-                        for (int i = 0; i < docs.length(); i++) {
-                            JSONObject bookObj = docs.getJSONObject(i);
-                            String title = bookObj.optString("title", "Không có tiêu đề");
-                            JSONArray authors = bookObj.optJSONArray("author_name");
-                            String author = (authors != null && authors.length() > 0)
-                                    ? authors.getString(0)
-                                    : "Không rõ";
-
-                            newList.add(new Book(title, author));
-                        }
-                    }
-
-                    runOnUiThread(() -> {
-                        bookList.clear();
-                        bookList.addAll(newList);
-                        adapter.notifyDataSetChanged();
-                    });
-
-                } catch (Exception e) {
-                    Log.e(TAG, "Parse error", e);
-                }
-            }
-        });
-
-    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

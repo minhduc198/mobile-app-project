@@ -20,9 +20,17 @@ public class MenuOverlay extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_overlay, container, false);
 
+        // Xử lý nút Log In
         Button btnLogin = view.findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        });
+
+        // ✅ Xử lý nút Sign Up
+        Button btnSignup = view.findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SignUpActivity.class);
             startActivity(intent);
         });
 

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/btnGoogleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_outline_gray"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_google"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập bằng Google"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- OR Divider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginVertical="20dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:background="#C7C7CC" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginHorizontal="8dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:background="#C7C7CC" />
+        </LinearLayout>
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input_outline"
+            android:hint="Enter your email"
+            android:paddingHorizontal="12dp"
+            android:inputType="textEmailAddress"
+            android:textSize="15sp" />
+
+        <!-- Screen Name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Screen Name"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etScreenName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input_outline"
+            android:hint="Enter screen name"
+            android:paddingHorizontal="12dp"
+            android:inputType="textPersonName"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your URL: https://openlibrary.org/people/screenname"
+            android:textColor="#666666"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Password -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input_outline"
+            android:hint="Enter password"
+            android:paddingHorizontal="12dp"
+            android:inputType="textPassword"
+            android:textSize="15sp" />
+
+        <!-- Checkboxes -->
+        <CheckBox
+            android:id="@+id/cbNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want to receive news, announcements, and resources from the Internet Archive."
+            android:textSize="14sp"
+            android:layout_marginTop="12dp" />
+
+        <CheckBox
+            android:id="@+id/cbAccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want to apply for special print disability access through a qualifying program."
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Sign Up Button -->
+        <Button
+            android:id="@+id/btnSignupEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Sign Up with Email"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#007AFF"
+            android:layout_marginTop="20dp" />
+
+        <!-- Already have account -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account?"
+                android:textColor="#555555"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Log in"
+                android:textColor="#007AFF"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

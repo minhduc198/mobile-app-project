@@ -7,41 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- AppBar: header + nav, sticky trên cùng -->
+        <!-- Header cố định (không cuộn) -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-            <LinearLayout
+            <fragment
+                android:id="@+id/headerFragment"
+                android:name="com.mobile.openlibraryapp.HeaderFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content" />
 
-                <!-- Header -->
-                <fragment
-                    android:id="@+id/headerFragment"
-                    android:name="com.mobile.openlibraryapp.HeaderFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <!-- Nav bar -->
-                <fragment
-                    android:id="@+id/navFragment"
-                    android:name="com.mobile.openlibraryapp.NavFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Nội dung cuộn: category + content + footer -->
+        <!-- Nội dung cuộn (bao gồm Nav + content + footer) -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScroll"
             android:layout_width="match_parent"
@@ -53,6 +38,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <!-- Nav bar (cuộn cùng nội dung) -->
+                <fragment
+                    android:id="@+id/navFragment"
+                    android:name="com.mobile.openlibraryapp.NavFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <!-- Category -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -80,22 +72,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:layout="@layout/fragment_footer" />
-
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <!-- Fragment động -->
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <!-- Drawer Menu -->
-    <include
+    <fragment
         android:id="@+id/rightDrawer"
-        layout="@layout/menu_overlay"
+        android:name="com.mobile.openlibraryapp.MenuOverlay"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="end" />

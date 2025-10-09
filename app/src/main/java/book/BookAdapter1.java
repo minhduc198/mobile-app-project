@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -43,8 +44,18 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book1 book = books1.get(position);
         if (book == null) return;
+        if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
+            String coverUrl = "https://covers.openlibrary.org/b/isbn/" + book.getIsbn() + "-M.jpg";
 
-        holder.imageView.setImageResource(book.getResId());
+            Glide.with(context)
+                    .load(coverUrl)
+                    .placeholder(book.getResId()) // Show local image while loading
+                    .error(book.getResId()) // Show local image if loading fails
+                    .into(holder.imageView);
+        } else {
+            // Fall back to local resource
+            holder.imageView.setImageResource(book.getResId());
+        }
         holder.button.setText("READ");
 
         View.OnClickListener openBookDetail = v -> {
@@ -54,6 +65,7 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
         args.putString("book_title", book.getTitle());
         args.putString("book_author", book.getAuthor());
         args.putInt("book_image", book.getResId());
+        args.putString("book_isbn", book.getIsbn());
         fragment.setArguments(args);
 
         View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container);

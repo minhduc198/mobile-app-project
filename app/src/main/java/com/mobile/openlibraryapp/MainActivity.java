@@ -130,23 +130,42 @@ public class MainActivity extends AppCompatActivity {
     private List<Category> getListCategory() {
         List<Category> listCategory = new ArrayList<>();
 
-        List<Book1> listBook = new ArrayList<>();
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Have Read"));
-        listBook.add(new Book1(R.drawable.book,"Have Read"));
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Have Read"));
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Have Read"));
-        listBook.add(new Book1(R.drawable.book,"Read"));
-        listBook.add(new Book1(R.drawable.book,"Have Read"));
+        // Category 1: Trending Books
+        List<Book1> trendingBooks = new ArrayList<>();
+        trendingBooks.add(new Book1("Shanna", "Kathleen E. Woodiwiss",R.drawable.book, "Read", "0861883861"));
+        trendingBooks.add(new Book1("Rowan of Rin", "Emily Rodda", R.drawable.book, "Read", "0439385652"));
+        trendingBooks.add(new Book1("Amber Brown Goes Fourth", "Paula Danziger", R.drawable.book, "Read", "0590934252"));
+        trendingBooks.add(new Book1("Mixing with Your Mind", "Michael Paul Stavrou", R.drawable.book, "Read", "0646428756"));
+        trendingBooks.add(new Book1("Lehninger Principles of Biochemistry", "David L. Nelson and Michael M. Cox", R.drawable.book, "Read", "9781319228002"));
 
-        listCategory.add(new Category("Trending Books", listBook));
-        listCategory.add(new Category("Classic Books", listBook));
-        listCategory.add(new Category("History Books", listBook));
-        listCategory.add(new Category("Magic Books", listBook));
+        // Category 2: Classic Books
+        List<Book1> classicBooks = new ArrayList<>();
+        classicBooks.add(new Book1("Black Beauty", "Anna Sewell", R.drawable.book, "Read", "9781453054765"));
+        classicBooks.add(new Book1("The twins at St. Clare's", "Enid Blyton", R.drawable.book, "Read", "1405219777"));
+        classicBooks.add(new Book1("The Faerie Qveene", "Edmund Spenser", R.drawable.book, "Read", "058209951X"));
+        classicBooks.add(new Book1("The Red and the Black", "Stendhal", R.drawable.book, "Read", "1840221275"));
+        classicBooks.add(new Book1("The History of Herodotus", "Herodotus", R.drawable.book, "Read", "140430732X"));
+
+        // Category 3: Fantasy Books
+        List<Book1> fantasyBooks = new ArrayList<>();
+        fantasyBooks.add(new Book1("The Lord Of The Rings", " J.R.R. Tolkien", R.drawable.book, "Read", "9780544003415"));
+        fantasyBooks.add(new Book1("A Game of Thrones", "George R. R. Martin", R.drawable.book, "Read", "9780553103540"));
+        fantasyBooks.add(new Book1("The Way of Kings", "Brandon Sanderson", R.drawable.book, "Read", "9780765326355"));
+        fantasyBooks.add(new Book1("The Mark of Athena", "Rick Riordan", R.drawable.book, "Read", "9780545782814"));
+        fantasyBooks.add(new Book1("Hatching Magic", "Ann E. Downer", R.drawable.book, "Read", "0689870574"));
+
+        // Category 4: Sci-Fi Books
+        List<Book1> scifiBooks = new ArrayList<>();
+        scifiBooks.add(new Book1("The Biology of Science Fiction Cinema", "Mark C. Glassy", R.drawable.book, "Read", "0786409983"));
+        scifiBooks.add(new Book1("Escape to Witch Mountain", "Alexander Key", R.drawable.book, "Read", "9780671297107"));
+        scifiBooks.add(new Book1("The Black Hole", "Alan Dean Foster", R.drawable.book, "Read", "0345285387"));
+        scifiBooks.add(new Book1("Enemy Territory", "Keith R. A. DeCandido", R.drawable.book, "Read", "1416500146"));
+        scifiBooks.add(new Book1("Wolf Tower", "Tanith Lee", R.drawable.book, "Read", "0142300306"));
+
+        listCategory.add(new Category("Trending Books", trendingBooks));
+        listCategory.add(new Category("Classic Books", classicBooks));
+        listCategory.add(new Category("Fantasy Books", fantasyBooks));
+        listCategory.add(new Category("Sci-Fi Books", scifiBooks));
 
         return listCategory;
     }

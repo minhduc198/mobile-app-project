@@ -25,7 +25,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
-                android:src="@drawable/heart" />
+                android:src="@drawable/heart"/>
 
             <TextView
                 android:layout_width="140dp"
@@ -128,6 +128,7 @@
             android:text="read"/>
 
         <ImageButton
+            android:id="@+id/favorite_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/heart1"
@@ -155,18 +156,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:gravity="center"
-                android:text="Expanded"/>
+                android:text="Expanded Content"/>
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/cell_title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
-                android:text="Not Expanded"/>
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/title_view_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Book Description"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/black"/>
+            </ScrollView>
         </FrameLayout>
     </com.ramotion.foldingcell.FoldingCell>
 </RelativeLayout>

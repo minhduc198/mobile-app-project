@@ -49,11 +49,10 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
 
             Glide.with(context)
                     .load(coverUrl)
-                    .placeholder(book.getResId()) // Show local image while loading
-                    .error(book.getResId()) // Show local image if loading fails
+                    .placeholder(book.getResId())
+                    .error(book.getResId())
                     .into(holder.imageView);
         } else {
-            // Fall back to local resource
             holder.imageView.setImageResource(book.getResId());
         }
         holder.button.setText("READ");
@@ -66,6 +65,10 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
         args.putString("book_author", book.getAuthor());
         args.putInt("book_image", book.getResId());
         args.putString("book_isbn", book.getIsbn());
+        args.putString("book_description", book.getDescription());
+        args.putInt("book_favorite_count", book.getFavoriteCount());
+        args.putInt("book_currently_reading_count", book.getCurrentlyReadingCount());
+        args.putInt("book_have_read_count", book.getHaveReadCount());
         fragment.setArguments(args);
 
         View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container);

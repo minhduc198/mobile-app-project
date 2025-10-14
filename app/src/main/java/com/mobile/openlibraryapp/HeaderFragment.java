@@ -25,18 +25,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class HeaderFragment extends Fragment {
 
     private ImageView btnSearch, btnMenu, logo;
     private AutoCompleteTextView searchBox;
-    private ArrayAdapter<String> suggestionAdapter;
-    private OkHttpClient client;
 
     @Nullable
     @Override
@@ -49,31 +42,6 @@ public class HeaderFragment extends Fragment {
         btnMenu = view.findViewById(R.id.btnMenu);
         logo = view.findViewById(R.id.logo);
         searchBox = view.findViewById(R.id.searchBox);
-
-        client = new OkHttpClient();
-
-        suggestionAdapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                new ArrayList<>()
-        );
-        searchBox.setAdapter(suggestionAdapter);
-        searchBox.setThreshold(1);
-
-        searchBox.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() >= 2) {
-                    fetchSuggestionsFromApi(s.toString());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
 
         btnSearch.setOnClickListener(v -> showSearchBox());
 
@@ -121,45 +89,4 @@ public class HeaderFragment extends Fragment {
         return searchBox;
     }
 
-    private void fetchSuggestionsFromApi(String query) {
-        String url = "https://openlibrary.org/search.json?q=" + Uri.encode(query);
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    try {
-                        JSONObject json = new JSONObject(response.body().string());
-                        JSONArray docs = json.getJSONArray("docs");
-
-                        List<String> results = new ArrayList<>();
-                        for (int i = 0; i < Math.min(docs.length(), 10); i++) {
-                            JSONObject book = docs.getJSONObject(i);
-                            if (book.has("title")) {
-                                results.add(book.getString("title"));
-                            }
-                        }
-
-                        requireActivity().runOnUiThread(() -> {
-                            suggestionAdapter.clear();
-                            suggestionAdapter.addAll(results);
-                            suggestionAdapter.notifyDataSetChanged();
-                            searchBox.showDropDown();
-                        });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
 }

@@ -1,5 +1,9 @@
 package com.mobile.openlibraryapp;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +12,8 @@ import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -22,22 +28,40 @@ import category.Category;
 import category.CategoryAdapter;
 
 
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
+import ApiSearch.Book;
+import ApiSearch.BookAdapter;
+import ApiSearch.BookSearchResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import android.widget.Toast;
+import ApiSearch.ApiClient;
+import ApiSearch.OpenLibraryApiService;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.os.Handler;
+import android.os.Looper;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private RecyclerView recyclerView;
-    private BookAdapter adapter;
-    private List<Book> bookList = new ArrayList<>();
-    private OkHttpClient client = new OkHttpClient();
+    private EditText searchEditText;
+    private RecyclerView booksRecyclerView;
+    private TextView emptyTextView;
+    private BookAdapter bookAdapter;
+    private final Handler searchHandler = new Handler(Looper.getMainLooper());
+    private Runnable searchRunnable;
+    private retrofit2.Call<BookSearchResponse> currentCall;
+    private static final int SEARCH_TRIGGER_DELAY_IN_MS = 500;
+    private static final int MIN_QUERY_LENGTH = 3;
+    private View search;
+    private ProgressBar progressbar;
 
     private RecyclerView recvCategory;
     private CategoryAdapter categoryAdapter;
     private DrawerLayout drawerLayout;
-    private Call currentCall;
 
 
     @Override
@@ -60,13 +84,93 @@ public class MainActivity extends AppCompatActivity {
         // Khởi tạo Drawer và RecyclerView cho Book
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookAdapter(bookList);
-        recyclerView.setAdapter(adapter);
+        // Initialize views
+        search = findViewById(R.id.search_result);
+        View head = findViewById(R.id.headerFragment);
+        searchEditText = head.findViewById(R.id.searchBox);
+        booksRecyclerView = search.findViewById(R.id.booksRecyclerView);
+        emptyTextView = search.findViewById(R.id.emptyTextView);
+        progressbar = search.findViewById(R.id.progressBar);
+
+        // Setup RecyclerView
+        booksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        bookAdapter = new BookAdapter(this, new ArrayList<>());
+        booksRecyclerView.setAdapter(bookAdapter);
 
         //Connect fragment BookDetail in MainActivity
         BookAdapter1 adapter = new BookAdapter1(MainActivity.this);
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Remove any pending searches
+                searchHandler.removeCallbacks(searchRunnable);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String query = s.toString().trim();
+
+                searchRunnable = () -> performSearch(query);
+
+                if (query.length() >= MIN_QUERY_LENGTH) {
+                    // Schedule the search to run after the delay
+                    searchHandler.postDelayed(searchRunnable, SEARCH_TRIGGER_DELAY_IN_MS);
+                } else {
+                    // If query is too short, clear the results
+                    bookAdapter.updateBooks(new ArrayList<>());
+                    booksRecyclerView.setVisibility(GONE);
+                    emptyTextView.setVisibility(GONE);
+                    search.setVisibility(GONE);
+                }
+            }
+        });
+    }
+
+    private void performSearch(String query) {
+        if (currentCall != null && currentCall.isExecuted() && !currentCall.isCanceled()) {
+            currentCall.cancel();
+        }
+
+        booksRecyclerView.setVisibility(GONE);
+        emptyTextView.setVisibility(GONE);
+        search.setVisibility(VISIBLE);
+        progressbar.setVisibility(View.VISIBLE);
+
+        OpenLibraryApiService apiService = ApiClient.getApiService();
+
+        currentCall = apiService.searchBooks(query);
+
+        currentCall.enqueue(new Callback<BookSearchResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<BookSearchResponse> call, @NonNull Response<BookSearchResponse> response) {
+                progressbar.setVisibility(View.GONE);
+                if (response.isSuccessful() && response.body() != null && !response.body().getDocs().isEmpty()) {
+
+                    booksRecyclerView.setVisibility(VISIBLE);
+                    bookAdapter.updateBooks(response.body().getDocs());
+                } else if (response.isSuccessful()) {
+                    emptyTextView.setText("No books found for \"" + query + "\"");
+                    emptyTextView.setVisibility(VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BookSearchResponse> call, @NonNull Throwable t) {
+                if (call.isCanceled()) {
+                    return;
+                }
+                emptyTextView.setText("Failed to load data. Check your connection.");
+                emptyTextView.setVisibility(VISIBLE);
+                progressbar.setVisibility(View.GONE);
+                t.printStackTrace();
+                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupDrawerListener(){

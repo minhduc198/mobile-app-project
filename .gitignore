@@ -1,0 +1,6 @@
+/build
+# Project exclude paths
+/.gradle/
+/.vscode/
+/src/
+/template-FE/

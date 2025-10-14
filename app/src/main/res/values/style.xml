@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FooterLink">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#1E90FF</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <!-- Your FooterHeader and FooterLink styles should already be here -->
+    <style name="FooterHeader"></style>
+
+    <!-- PASTE THE STAT STYLES HERE -->
+    <style name="StatNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="StatLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#555555</item>
+    </style>
+
+
+    <!-- <style name="FooterLink"></style> -->
+</resources>

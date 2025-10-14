@@ -1,0 +1,8 @@
+lib.jar filter=lfs diff=lfs merge=lfs -text
+instrumented-gradle-api-9.0-milestone-1.jar filter=lfs diff=lfs merge=lfs -text
+gradle-api-8.13.jar filter=lfs diff=lfs merge=lfs -text
+gradle-api-9.0-milestone-1.jar filter=lfs diff=lfs merge=lfs -text
+util-8.jar filter=lfs diff=lfs merge=lfs -text
+gradle-8.13-src.zip filter=lfs diff=lfs merge=lfs -text
+kotlin-compiler-embeddable-2.0.21.jar filter=lfs diff=lfs merge=lfs -text
+instrumented-util-8.jar filter=lfs diff=lfs merge=lfs -text

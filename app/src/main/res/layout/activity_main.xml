@@ -92,4 +92,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="end" />
 
+    <include
+        android:id="@+id/search_result"
+        layout="@layout/search_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="55dp"
+        android:visibility="gone"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

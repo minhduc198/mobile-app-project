@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_openlibrary_logo"
+        android:src="@drawable/ic_open_library"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name" />

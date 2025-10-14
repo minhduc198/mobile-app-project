@@ -63,7 +63,7 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
         Bundle args = new Bundle();
         args.putString("book_title", book.getTitle());
         args.putString("book_author", book.getAuthor());
-        args.putInt("book_image", book.getResId());
+//        args.putInt("book_image", book.getResId());
         args.putString("book_isbn", book.getIsbn());
         args.putString("book_description", book.getDescription());
         args.putInt("book_favorite_count", book.getFavoriteCount());
@@ -85,7 +85,7 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
          };
 
         holder.button.setOnClickListener(openBookDetail);
-        holder.imageView.setOnClickListener(openBookDetail);
+//        holder.imageView.setOnClickListener(openBookDetail);
 
     }
 

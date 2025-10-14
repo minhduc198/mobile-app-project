@@ -17,10 +17,13 @@ import com.ramotion.foldingcell.FoldingCell;
 public class BookDetailFragment extends Fragment {
 
     private ImageView imgBook;
-    private TextView txtTitle, txtAuthor, txtDescription;
+    private TextView txtTitle, txtAuthor;
     private TextView txtFavoriteCount, txtCurrentlyReadingCount, txtHaveReadCount;
-    private Button btnRead;
+    private Button btnRead, btnToggleDescription;
     private ImageButton btnFavorite;
+    private TextView titleViewDescription;
+
+    private boolean isExpanded = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,15 +34,31 @@ public class BookDetailFragment extends Fragment {
         imgBook = rootView.findViewById(R.id.img_book);
         txtTitle = rootView.findViewById(R.id.title);
         txtAuthor = rootView.findViewById(R.id.author);
-
         txtFavoriteCount = rootView.findViewById(R.id.number_view);
         txtCurrentlyReadingCount = rootView.findViewById(R.id.number_view1);
         txtHaveReadCount = rootView.findViewById(R.id.number_view2);
-
         btnRead = rootView.findViewById(R.id.active_button);
-        btnFavorite = rootView.findViewById(R.id.favorite_button); // You need to add an ID to the ImageButton in descrip_book.xml
+        btnFavorite = rootView.findViewById(R.id.favorite_button);
+
+        titleViewDescription = rootView.findViewById(R.id.title_view_description);
+        btnToggleDescription = rootView.findViewById(R.id.btn_toggle_description);
 
         foldingCell.setOnClickListener(v -> foldingCell.toggle(false));
+
+
+        btnToggleDescription.setOnClickListener(v -> {
+            if (isExpanded) {
+                titleViewDescription.setMaxLines(8);
+                titleViewDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
+                btnToggleDescription.setText("Show More");
+                isExpanded = false;
+            } else {
+                titleViewDescription.setMaxLines(Integer.MAX_VALUE);
+                titleViewDescription.setEllipsize(null);
+                btnToggleDescription.setText("Show Less");
+                isExpanded = true;
+            }
+        });
 
         Bundle args = getArguments();
         if (args != null) {
@@ -54,12 +73,10 @@ public class BookDetailFragment extends Fragment {
 
             txtTitle.setText(title);
             txtAuthor.setText(author);
-
             txtFavoriteCount.setText(String.valueOf(favoriteCount));
             txtCurrentlyReadingCount.setText(String.valueOf(currentlyReadingCount));
             txtHaveReadCount.setText(String.valueOf(haveReadCount));
 
-            TextView titleViewDescription = foldingCell.findViewById(R.id.title_view_description);
             if (titleViewDescription != null) {
                 titleViewDescription.setText(description);
             }
@@ -77,6 +94,7 @@ public class BookDetailFragment extends Fragment {
                 imgBook.setImageResource(imageRes);
             }
         }
+
         return rootView;
     }
 }

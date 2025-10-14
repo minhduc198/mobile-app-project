@@ -6,11 +6,36 @@
     android:padding="16dp"
     android:fillViewport="true"
     android:clipToPadding="false">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Around the Library" android:textSize="24sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Here'''s what'''s happened over the last 28 days. More recent changes." android:textSize="14sp"/>
+            <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:columnCount="2" android:rowCount="3">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:gravity="center_horizontal" android:orientation="vertical" android:padding="8dp">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp" android:src="@drawable/chart_red"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="41,711,544" android:textSize="18sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UNIQUE VISITORS"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:gravity="center_horizontal" android:orientation="vertical" android:padding="8dp">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp" android:src="@drawable/chart_green"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="218,919" android:textSize="18sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NEW MEMBERS"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:gravity="center_horizontal" android:orientation="vertical" android:padding="8dp">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp" android:src="@drawable/chart_blue"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="626,894" android:textSize="18sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CATALOG EDITS"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:gravity="center_horizontal" android:orientation="vertical" android:padding="8dp">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp" android:src="@drawable/chart_orange"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3,167" android:textSize="18sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LISTS CREATED"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:gravity="center_horizontal" android:orientation="vertical" android:padding="8dp">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp" android:src="@drawable/chart_dark_green"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="277,052" android:textSize="18sp" android:textStyle="bold"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="EBOOKS BORROWED"/>
+        </LinearLayout>
+    </GridLayout>
 
         <TextView
             android:layout_height="wrap_content"
@@ -18,6 +43,7 @@
             android:text="@string/h1"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:layout_marginTop="16dp"
             android:paddingBottom="8dp"/>
 
         <TextView android:text="@string/link_vison" style="@style/FooterLink"

@@ -30,7 +30,7 @@ public class FooterFragment extends Fragment {
         TextView linkVision = rootView.findViewById(R.id.linkVision);
         TextView linkVolunteer = rootView.findViewById(R.id.linkVolunteer);
         TextView linkPartnerWithUs = rootView.findViewById(R.id.linkPartnerWithUs);
-        TextView linkCarrers = rootView.findViewById(R.id.linkCarrers);
+        TextView linkCareers = rootView.findViewById(R.id.linkCareers);
         TextView linkBlog = rootView.findViewById(R.id.linkBlog);
         TextView linkTermsOfService = rootView.findViewById(R.id.linkTermsOfService);
         TextView linkDonate = rootView.findViewById(R.id.linkDonate);
@@ -39,7 +39,7 @@ public class FooterFragment extends Fragment {
         linkVision.setOnClickListener(v -> openWebPage("https://openlibrary.org/about"));
         linkVolunteer.setOnClickListener(v -> openWebPage("https://openlibrary.org/volunteer"));
         linkPartnerWithUs.setOnClickListener(v -> openWebPage("https://openlibrary.org/partner-with-us"));
-        linkCarrers.setOnClickListener(v -> openWebPage("https://archive.org/about/jobs"));
+        linkCareers.setOnClickListener(v -> openWebPage("https://archive.org/about/jobs"));
         linkBlog.setOnClickListener(v -> openWebPage("https://blog.openlibrary.org/"));
         linkTermsOfService.setOnClickListener(v -> openWebPage("https://archive.org/about/terms"));
         linkDonate.setOnClickListener(v -> openWebPage("https://archive.org/donate/?platform=ol&origin=olwww-TopNavDonateButton"));

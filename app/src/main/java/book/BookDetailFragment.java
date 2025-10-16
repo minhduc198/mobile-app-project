@@ -42,6 +42,13 @@ public class BookDetailFragment extends Fragment {
 
         titleViewDescription = rootView.findViewById(R.id.title_view_description);
         btnToggleDescription = rootView.findViewById(R.id.btn_toggle_description);
+        ImageButton btnBack = rootView.findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(v -> {
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .popBackStack();
+        });
+
 
         foldingCell.setOnClickListener(v -> foldingCell.toggle(false));
 

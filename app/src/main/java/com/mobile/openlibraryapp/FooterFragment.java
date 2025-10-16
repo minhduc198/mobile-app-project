@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +26,32 @@ public class FooterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_footer, container, false);
 
+        // Footer link
+        TextView aboutPara1 = rootView.findViewById(R.id.about_para1);
+        TextView aboutPara2 = rootView.findViewById(R.id.about_para2);
+        TextView latestBlogTitle = rootView.findViewById(R.id.latest_blog_title);
+        TextView blogPost1 = rootView.findViewById(R.id.blog_post_1);
+        TextView blogPost2 = rootView.findViewById(R.id.blog_post_2);
+        TextView blogPost3 = rootView.findViewById(R.id.blog_post_3);
+
+        if (aboutPara1 != null) {
+            aboutPara1.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        if (aboutPara2 != null) {
+            aboutPara2.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        if (latestBlogTitle != null) {
+            latestBlogTitle.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        if (blogPost1 != null) {
+            blogPost1.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        if (blogPost2 != null) {
+            blogPost2.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        if (blogPost3 != null) {
+            blogPost3.setMovementMethod(LinkMovementMethod.getInstance());
+        }
         // Footer link
         TextView linkVision = rootView.findViewById(R.id.linkVision);
         TextView linkVolunteer = rootView.findViewById(R.id.linkVolunteer);

@@ -26,6 +26,8 @@ import book.Book1;
 import book.BookAdapter1;
 import category.Category;
 import category.CategoryAdapter;
+import com.mobile.openlibraryapp.WelcomeAdapter;
+import com.mobile.openlibraryapp.Welcome;
 
 
 import ApiSearch.Book;
@@ -41,6 +43,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.SnapHelper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private DrawerLayout drawerLayout;
 
+    private RecyclerView recvWelcome;
+    private WelcomeAdapter welcomeAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupDrawerListener();
+
+        // Khởi tạo Welcome RecyclerView
+        recvWelcome = findViewById(R.id.recv_welcome);
+        welcomeAdapter = new WelcomeAdapter(this);
+
+        LinearLayoutManager welcomeLayoutManager = new LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
+        );
+        recvWelcome.setLayoutManager(welcomeLayoutManager);
+        List<Welcome> welcomeList = getWelcomeData();
+        welcomeAdapter.setData(welcomeList);
+        recvWelcome.setAdapter(welcomeAdapter);
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recvWelcome);
 
         // Khởi tạo Category
         recvCategory = findViewById(R.id.recv_category);
@@ -229,6 +254,20 @@ public class MainActivity extends AppCompatActivity {
         itemDevCenter.setOnClickListener(v -> {
             openWebPage("https://openlibrary.org/developer-center");
         });
+    }
+
+    private List<Welcome> getWelcomeData() {
+        List<Welcome> welcomeList = new ArrayList<>();
+
+        welcomeList.add(new Welcome(R.drawable.welcome1, "Read Free Library Books Online", "Millions of books available through Controlled Digital Lending"));
+        welcomeList.add(new Welcome(R.drawable.welcome2,"Set a Yearly Reading Goal", "Learn how to set a yearly reading goal and track what you read"));
+        welcomeList.add(new Welcome(R.drawable.welcome3,"Keep Track of your Favorite Books", "Organize your Books using Lists & the Reading Log"));
+        welcomeList.add(new Welcome(R.drawable.welcome4,"Try the virtual Library Explorer", "Digital shelves organized like a physical library"));
+        welcomeList.add(new Welcome(R.drawable.welcome5,"Try Fulltext Search", "Find matching results within the text of millions of books"));
+        welcomeList.add(new Welcome(R.drawable.welcome6,"Be an Open Librarian", "Dozens of ways you can help improve the library"));
+        welcomeList.add(new Welcome(R.drawable.welcome7,"Volunteer at Open Library", "Discover opportunities to improve the library"));
+        welcomeList.add(new Welcome(R.drawable.welcome8,"Send us feedback", "Your feedback will help us improve these cards"));
+        return welcomeList;
     }
 
     private List<Category> getListCategory() {

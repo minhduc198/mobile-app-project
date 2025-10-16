@@ -16,6 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/title_author">
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/black"
+                tools:ignore="UseAppTint"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -27,16 +39,16 @@
                 android:fontFamily="serif"
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="60dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/author"
                 android:text="by Charles Dickers and Bernardo Moreno Carrillo"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@id/title"/>
+                android:layout_below="@id/title" />
         </RelativeLayout>
 
         <LinearLayout
@@ -51,8 +63,9 @@
                 android:id="@+id/img_book"
                 android:src="@drawable/book"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
         </LinearLayout>
-        <include layout="@layout/descrip_book"/>
+
+        <include layout="@layout/descrip_book" />
     </LinearLayout>
 </ScrollView>

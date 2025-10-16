@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import com.bumptech.glide.Glide;
 import com.mobile.openlibraryapp.R;
 import com.ramotion.foldingcell.FoldingCell;
+import com.google.android.material.snackbar.Snackbar;
+import android.widget.Toast;
+
 
 public class BookDetailFragment extends Fragment {
 
@@ -100,15 +103,16 @@ public class BookDetailFragment extends Fragment {
             isFavorite = prefs.getBoolean(bookKey, false);
             updateHeartIcon();
 
-            // Xử lý toggle trái tim
             btnFavorite.setOnClickListener(v -> {
                 isFavorite = !isFavorite;
                 updateHeartIcon();
 
-                // Lưu lại trạng thái vào SharedPreferences
                 prefs.edit().putBoolean(bookKey, isFavorite).apply();
 
-                // Hiệu ứng nhẹ
+                String message = isFavorite ? "Add to Favorite" : "Remove from Favorite";
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+
+                // Hiệu ứng nhấn
                 v.animate()
                         .scaleX(1.2f)
                         .scaleY(1.2f)

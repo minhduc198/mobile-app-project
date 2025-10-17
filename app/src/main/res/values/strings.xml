@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">openlibraryapp</string>
+    <string name="app_name">Open Library</string>
     <string name="category1">Trending Books</string>
     <string name="category2">Classic Books</string>
     <string name="category3">History Books</string>

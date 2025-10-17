@@ -46,28 +46,30 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         holder.imageView.setImageResource(book.getImgFavour());
         holder.tvTitle.setText(book.getTitle());
 
-//        View.OnClickListener openFavouriteBook = v -> {
-//            FavouriteBookFragment fragment = new FavouriteBookFragment();
-//
-//            Bundle args = new Bundle();
-//            args.putString("book_title", book.getTitle());
-//            args.putString("book_isbn", book.getIsbn());
-//            fragment.setArguments(args);
-//
-//            View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container1);
-//            if (fragmentContainer != null) {
-//                fragmentContainer.setVisibility(View.VISIBLE);
-//            }
-//
-//            FragmentTransaction transaction = ((FragmentActivity) context)
-//                    .getSupportFragmentManager()
-//                    .beginTransaction();
-//            transaction.replace(R.id.fragment_container1,fragment);
-//            transaction.addToBackStack(null);
-//            transaction.commit();
-//        };
-//
-//        holder.tvTitle.setOnClickListener(openFavouriteBook);
+        View.OnClickListener openDetail = v -> {
+            BookDetailFragment fragment = new BookDetailFragment();
+
+            Bundle args = new Bundle();
+            args.putString("book_title", book.getTitle());
+            args.putString("book_author", book.getAuthor());
+            args.putString("book_isbn", book.getIsbn());
+            args.putString("book_description", book.getDescription());
+            args.putInt("book_image", book.getImgFavour());
+            args.putInt("book_favorite_count", book.getFavoriteCount());
+            args.putInt("book_currently_reading_count", book.getCurrentlyReadingCount());
+            args.putInt("book_have_read_count", book.getHaveReadCount());
+            fragment.setArguments(args);
+
+            FragmentTransaction transaction = ((FragmentActivity) context)
+                    .getSupportFragmentManager()
+                    .beginTransaction();
+            transaction.replace(R.id.fragment_container1, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        };
+
+        holder.tvTitle.setOnClickListener(openDetail);
+        holder.imageView.setOnClickListener(openDetail);
 
     }
 

@@ -44,15 +44,12 @@
     <string name="link_chinese">中文</string>
     <string name="link_japanese">日本語</string>
     <string name="note">Open Library is an initiative of the Internet Archive, a 501(c)(3) non-profit, building a digital library of Internet sites and other cultural artifacts in digital form.</string>
-    <!-- ... your existing strings ... -->
 
-    <!-- "About the Project" Section -->
     <string name="about_project_title">About the Project</string>
     <string name="about_project_para1">Open Library is an open, editable library catalog, building towards a web page for every book ever published.<a href="https://openlibrary.org/about">More</a> </string>
     <string name="about_project_para2">Just like Wikipedia, you can contribute new information or corrections to the catalog. You can browse by <a href="https://openlibrary.org/subjects">subjects</a>, <a href="https://openlibrary.org/authors">authors</a> or <a href="https://openlibrary.org/lists">lists</a> members have created. If you love books, why not help build a library?
     </string>
 
-    <!-- Latest Blog Posts -->
     <string name="latest_blog_posts_title">
         <a href="https://blog.openlibrary.org/">Latest Blog Posts</a>
     </string>
@@ -65,56 +62,4 @@
     <string name="blog_post_3">
         <a href="https://blog.openlibrary.org/2025/08/31/sandy-chu-my-internship-at-the-internet-archive/">Sandy Chu: My Internship at the Internet Archive</a> - 31 August 2025
     </string>
-
-    <!-- <string name="latest_blog_posts_title">
-        <![CDATA[<a href="https://blog.openlibrary.org/">Latest Blog Posts</a>]]></string> -->
-
-    <!-- <string name="blog_post_1">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/26/save-the-date-2025-open-library-community-celebration/">Save the Date: 2025 Open Library Community Celebration</a> - 26 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_2">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/12/open-library-search-balancing-high-impact-with-high-demand/">Open Library Search: Balancing High-Impact with High-Demand</a> - 12 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_3">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/08/31/sandy-chu-my-internship-at-the-internet-archive/">Sandy Chu: My Internship at the Internet Archive</a> - 31 August 2025]]></string> -->
-
-
-    <!-- <string name="about_project_para1">
-        <![CDATA[Open Library is an open, editable library catalog, building towards a web page for every book ever published. <a href="https://openlibrary.org/about">More</a>]]></string> -->
-
-    <!-- <string name="about_project_para2">
-        <![CDATA[Just like Wikipedia, you can contribute new information or corrections to the catalog. You can browse by <a href="https://openlibrary.org/subjects">subjects</a>, <a href="https://openlibrary.org/authors">authors</a> or <a href="https://openlibrary.org/lists">lists</a> members have created. If you love books, why not help build a library?]]></string> -->
-
-
-    <!-- <string name="latest_blog_posts_title">
-        <![CDATA[<a href="https://blog.openlibrary.org/">Latest Blog Posts</a>]]></string> -->
-
-    <!-- <string name="blog_post_1">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/26/save-the-date-2025-open-library-community-celebration/">Save the Date: 2025 Open Library Community Celebration</a> - 26 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_2">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/12/open-library-search-balancing-high-impact-with-high-demand/">Open Library Search: Balancing High-Impact with High-Demand</a> - 12 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_3">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/08/31/sandy-chu-my-internship-at-the-internet-archive/">Sandy Chu: My Internship at the Internet Archive</a> - 31 August 2025]]></string> -->
-
-
-    <!-- <string name="about_project_para1">
-        <![CDATA[Open Library is an open, editable library catalog, building towards a web page for every book ever published. <a href="https://openlibrary.org/about">More</a>]]></string> -->
-
-    <!-- <string name="about_project_para2">
-        <![CDATA[Just like Wikipedia, you can contribute new information or corrections to the catalog. You can browse by <a href="https://openlibrary.org/subjects">subjects</a>, <a href="https://openlibrary.org/authors">authors</a> or <a href="https://openlibrary.org/lists">lists</a> members have created. If you love books, why not help build a library?]]></string> -->
-
-
-    <!-- <string name="latest_blog_posts_title">
-        <![CDATA[<a href="https://blog.openlibrary.org/">Latest Blog Posts</a>]]></string> -->
-
-    <!-- <string name="blog_post_1">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/26/save-the-date-2025-open-library-community-celebration/">Save the Date: 2025 Open Library Community Celebration</a> - 26 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_2">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/09/12/open-library-search-balancing-high-impact-with-high-demand/">Open Library Search: Balancing High-Impact with High-Demand</a> - 12 September 2025]]></string> -->
-
-    <!-- <string name="blog_post_3">
-        <![CDATA[<a href="https://blog.openlibrary.org/2025/08/31/sandy-chu-my-internship-at-the-internet-archive/">Sandy Chu: My Internship at the Internet Archive</a> - 31 August 2025]]></string> -->
 </resources>

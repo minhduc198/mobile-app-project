@@ -43,7 +43,7 @@ public class WelcomeAdapter extends RecyclerView.Adapter<WelcomeAdapter.WelcomeV
         // Set the image
         holder.imgWelcome.setImageResource(welcome.getImageResource());
 
-        // Set title and description if they exist in your Welcome class
+        // Set title and description
         if (welcome.getTitle() != null) {
             holder.tvTitle.setText(welcome.getTitle());
         }

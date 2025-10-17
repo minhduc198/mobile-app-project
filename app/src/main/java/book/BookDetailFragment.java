@@ -71,7 +71,7 @@ public class BookDetailFragment extends Fragment {
             isExpanded = !isExpanded;
         });
 
-        // Nhận dữ liệu từ Bundle
+        // Take data from Bundle
         Bundle args = getArguments();
         if (args != null) {
             String title = args.getString("book_title", "Unknown Title");
@@ -91,7 +91,7 @@ public class BookDetailFragment extends Fragment {
             titleViewDescription.setText(description);
             btnRead.setText("READ");
 
-            // Dùng ISBN làm key (nếu không có thì dùng title)
+            // Use ISBN for key
             bookKey = !isbn.isEmpty() ? isbn : title;
 
             if (!isbn.isEmpty()) {
@@ -105,7 +105,7 @@ public class BookDetailFragment extends Fragment {
                 imgBook.setImageResource(imageRes);
             }
 
-            // Load trạng thái tim đã lưu
+            // Load
             SharedPreferences prefs = requireContext().getSharedPreferences("favorites", Context.MODE_PRIVATE);
             isFavorite = prefs.getBoolean(bookKey, false);
             updateHeartIcon();
@@ -119,7 +119,7 @@ public class BookDetailFragment extends Fragment {
                 String message = isFavorite ? "Add to Favorite" : "Remove from Favorite";
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
 
-                // Hiệu ứng nhấn
+                // Click animation
                 v.animate()
                         .scaleX(1.2f)
                         .scaleY(1.2f)
@@ -134,9 +134,9 @@ public class BookDetailFragment extends Fragment {
 
     private void updateHeartIcon() {
         if (isFavorite) {
-            btnFavorite.setColorFilter(Color.parseColor("#E91E63")); // đỏ hồng
+            btnFavorite.setColorFilter(Color.parseColor("#E91E63"));
         } else {
-            btnFavorite.clearColorFilter(); // về trắng
+            btnFavorite.clearColorFilter();
         }
     }
 }

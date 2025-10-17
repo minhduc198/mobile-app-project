@@ -8,16 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.mobile.openlibraryapp.R;
 
 import java.util.List;
+
+import ApiSearch.BookAdapter;
 
 public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHolder> {
 
@@ -36,7 +41,8 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_book, parent, false);
         return new BookViewHolder(v);
     }
 
@@ -98,8 +104,9 @@ public class BookAdapter1 extends RecyclerView.Adapter<BookAdapter1.BookViewHold
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        Button button;
+
+        private ImageView imageView;
+        private Button button;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);

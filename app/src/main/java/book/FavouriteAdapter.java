@@ -19,7 +19,7 @@ import com.mobile.openlibraryapp.R;
 
 import java.util.List;
 
-public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>{
+public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder> {
     private Context context;
     private List<Favourite> favourBooks;
 
@@ -27,6 +27,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
     public void setData(List<Favourite> list) {
         this.favourBooks = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,41 +43,31 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         Favourite book = favourBooks.get(position);
         if (book == null) return;
 
-        if (book.getIsbn() != null && !book.getIsbn().isEmpty()) {
-            String coverUrl = "https://covers.openlibrary.org/b/isbn/" + book.getImgFavour() + "-M.jpg";
-
-            Glide.with(context)
-                    .load(coverUrl)
-                    .placeholder(book.getImgFavour())
-                    .error(book.getImgFavour())
-                    .into(holder.imageView);
-        } else {
-            holder.imageView.setImageResource(book.getImgFavour());
-        }
+        holder.imageView.setImageResource(book.getImgFavour());
         holder.tvTitle.setText(book.getTitle());
 
-        View.OnClickListener openFavouriteBook = v -> {
-            FavouriteBookFragment fragment = new FavouriteBookFragment();
-
-            Bundle args = new Bundle();
-            args.putString("book_title", book.getTitle());
-            args.putString("book_isbn", book.getIsbn());
-            fragment.setArguments(args);
-
-            View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container1);
-            if (fragmentContainer != null) {
-                fragmentContainer.setVisibility(View.VISIBLE);
-            }
-
-            FragmentTransaction transaction = ((FragmentActivity) context)
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-            transaction.replace(R.id.fragment_container1,fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        };
-
-        holder.tvTitle.setOnClickListener(openFavouriteBook);
+//        View.OnClickListener openFavouriteBook = v -> {
+//            FavouriteBookFragment fragment = new FavouriteBookFragment();
+//
+//            Bundle args = new Bundle();
+//            args.putString("book_title", book.getTitle());
+//            args.putString("book_isbn", book.getIsbn());
+//            fragment.setArguments(args);
+//
+//            View fragmentContainer = ((FragmentActivity) context).findViewById(R.id.fragment_container1);
+//            if (fragmentContainer != null) {
+//                fragmentContainer.setVisibility(View.VISIBLE);
+//            }
+//
+//            FragmentTransaction transaction = ((FragmentActivity) context)
+//                    .getSupportFragmentManager()
+//                    .beginTransaction();
+//            transaction.replace(R.id.fragment_container1,fragment);
+//            transaction.addToBackStack(null);
+//            transaction.commit();
+//        };
+//
+//        holder.tvTitle.setOnClickListener(openFavouriteBook);
 
     }
 

@@ -1,18 +1,15 @@
 package book;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 public class Favourite {
     private String title;
-    private String isbn;
+    private int imgFavour;
 
-    public Favourite(String isbn, String title) {
-        this.isbn = isbn;
+    public Favourite(int imgFavour, String title) {
+        this.imgFavour = imgFavour;
         this.title = title;
     }
 
-    public String getIsbn() { return isbn; }
+    public int getImgFavour() { return imgFavour; }
     public String getTitle() { return title; }
 
 

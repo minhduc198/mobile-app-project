@@ -7,10 +7,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class    SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private EditText etEmail, etScreenName, etPassword;
     private CheckBox cbNews, cbAccess;
@@ -29,6 +30,10 @@ public class    SignUpActivity extends AppCompatActivity {
         cbAccess = findViewById(R.id.cbAccess);
         btnSignupEmail = findViewById(R.id.btnSignupEmail);
         tvLogin = findViewById(R.id.tvLogin);
+
+        // 🔙 Nút quay lại
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> onBackPressed());
 
         btnSignupEmail.setOnClickListener(v -> handleSignUp());
 
@@ -49,7 +54,6 @@ public class    SignUpActivity extends AppCompatActivity {
             return;
         }
 
-
         boolean newsChecked = cbNews.isChecked();
         boolean accessChecked = cbAccess.isChecked();
 
@@ -61,7 +65,6 @@ public class    SignUpActivity extends AppCompatActivity {
                         (accessChecked ? "\nSpecial access applied" : ""),
                 Toast.LENGTH_LONG
         ).show();
-
 
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);

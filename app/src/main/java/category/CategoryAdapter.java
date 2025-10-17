@@ -47,7 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.nameCate.setText(category.getNameCate());
 
-        // setup horizontal RecyclerView cho list sách
+        // setup horizontal RecyclerView for book list
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false);
         holder.recvBook.setLayoutManager(linearLayoutManager);

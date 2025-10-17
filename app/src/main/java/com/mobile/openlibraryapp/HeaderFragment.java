@@ -84,7 +84,7 @@ public class HeaderFragment extends Fragment {
         }
     }
 
-    // Cho MainActivity lấy được searchBox
+    // MainActivity to get searchBox
     public View getSearchBoxView() {
         return searchBox;
     }

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupDrawerListener();
 
-        // Khởi tạo Welcome RecyclerView
+        // init Welcome RecyclerView
         recvWelcome = findViewById(R.id.recv_welcome);
         welcomeAdapter = new WelcomeAdapter(this);
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recvWelcome);
 
-        // Khởi tạo Category
+        // init Category
         recvCategory = findViewById(R.id.recv_category);
         categoryAdapter = new CategoryAdapter(this);
 
@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
         categoryAdapter.setData(getListCategory());
         recvCategory.setAdapter(categoryAdapter);
 
-        // Khởi tạo Drawer và RecyclerView cho Book
+        // init Drawer and RecyclerView for Book
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Initialize views
+        // init views
         search = findViewById(R.id.search_result);
         View head = findViewById(R.id.headerFragment);
         searchEditText = head.findViewById(R.id.searchBox);
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerListener(){
-        // Khởi tạo các TextView trong menu
+        // init TextView in menu
         TextView itemSubjects = findViewById(R.id.itemSubjects);
         TextView itemTrending = findViewById(R.id.itemTrending);
         TextView itemLibraryExplorer = findViewById(R.id.itemLibraryExplorer);
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         TextView itemHelp = findViewById(R.id.itemHelp);
         TextView itemDevCenter = findViewById(R.id.itemDevCenter);
 
-        // Setup click cho các TextView
+        // Setup click for TextView
         itemSubjects.setOnClickListener(v -> {
             openWebPage("https://openlibrary.org/subjects");
         });

@@ -1,5 +1,8 @@
 package book;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,17 +16,21 @@ import android.widget.ImageButton;
 import com.bumptech.glide.Glide;
 import com.mobile.openlibraryapp.R;
 import com.ramotion.foldingcell.FoldingCell;
+import com.google.android.material.snackbar.Snackbar;
+import android.widget.Toast;
+
 
 public class BookDetailFragment extends Fragment {
 
     private ImageView imgBook;
-    private TextView txtTitle, txtAuthor;
+    private TextView txtTitle, txtAuthor, titleViewDescription;
     private TextView txtFavoriteCount, txtCurrentlyReadingCount, txtHaveReadCount;
     private Button btnRead, btnToggleDescription;
     private ImageButton btnFavorite;
-    private TextView titleViewDescription;
 
     private boolean isExpanded = false;
+    private boolean isFavorite = false;
+    private String bookKey = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +46,6 @@ public class BookDetailFragment extends Fragment {
         txtHaveReadCount = rootView.findViewById(R.id.number_view2);
         btnRead = rootView.findViewById(R.id.active_button);
         btnFavorite = rootView.findViewById(R.id.favorite_button);
-
         titleViewDescription = rootView.findViewById(R.id.title_view_description);
         btnToggleDescription = rootView.findViewById(R.id.btn_toggle_description);
         ImageButton btnBack = rootView.findViewById(R.id.btn_back);
@@ -52,21 +58,20 @@ public class BookDetailFragment extends Fragment {
 
         foldingCell.setOnClickListener(v -> foldingCell.toggle(false));
 
-
         btnToggleDescription.setOnClickListener(v -> {
             if (isExpanded) {
-                titleViewDescription.setMaxLines(8);
+                titleViewDescription.setMaxLines(4);
                 titleViewDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
                 btnToggleDescription.setText("Show More");
-                isExpanded = false;
             } else {
                 titleViewDescription.setMaxLines(Integer.MAX_VALUE);
                 titleViewDescription.setEllipsize(null);
                 btnToggleDescription.setText("Show Less");
-                isExpanded = true;
             }
+            isExpanded = !isExpanded;
         });
 
+        // Take data from Bundle
         Bundle args = getArguments();
         if (args != null) {
             String title = args.getString("book_title", "Unknown Title");
@@ -83,12 +88,11 @@ public class BookDetailFragment extends Fragment {
             txtFavoriteCount.setText(String.valueOf(favoriteCount));
             txtCurrentlyReadingCount.setText(String.valueOf(currentlyReadingCount));
             txtHaveReadCount.setText(String.valueOf(haveReadCount));
-
-            if (titleViewDescription != null) {
-                titleViewDescription.setText(description);
-            }
-
+            titleViewDescription.setText(description);
             btnRead.setText("READ");
+
+            // Use ISBN for key
+            bookKey = !isbn.isEmpty() ? isbn : title;
 
             if (!isbn.isEmpty()) {
                 String coverUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-L.jpg";
@@ -100,8 +104,39 @@ public class BookDetailFragment extends Fragment {
             } else {
                 imgBook.setImageResource(imageRes);
             }
+
+            // Load
+            SharedPreferences prefs = requireContext().getSharedPreferences("favorites", Context.MODE_PRIVATE);
+            isFavorite = prefs.getBoolean(bookKey, false);
+            updateHeartIcon();
+
+            btnFavorite.setOnClickListener(v -> {
+                isFavorite = !isFavorite;
+                updateHeartIcon();
+
+                prefs.edit().putBoolean(bookKey, isFavorite).apply();
+
+                String message = isFavorite ? "Add to Favorite" : "Remove from Favorite";
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+
+                // Click animation
+                v.animate()
+                        .scaleX(1.2f)
+                        .scaleY(1.2f)
+                        .setDuration(150)
+                        .withEndAction(() -> v.animate().scaleX(1f).scaleY(1f).setDuration(150))
+                        .start();
+            });
         }
 
         return rootView;
+    }
+
+    private void updateHeartIcon() {
+        if (isFavorite) {
+            btnFavorite.setColorFilter(Color.parseColor("#E91E63"));
+        } else {
+            btnFavorite.clearColorFilter();
+        }
     }
 }

@@ -26,6 +26,8 @@ import book.Book1;
 import book.BookAdapter1;
 import category.Category;
 import category.CategoryAdapter;
+import com.mobile.openlibraryapp.WelcomeAdapter;
+import com.mobile.openlibraryapp.Welcome;
 
 
 import ApiSearch.Book;
@@ -41,6 +43,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.SnapHelper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private DrawerLayout drawerLayout;
 
+    private RecyclerView recvWelcome;
+    private WelcomeAdapter welcomeAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,24 @@ public class MainActivity extends AppCompatActivity {
 
         setupDrawerListener();
 
-        // Khởi tạo Category
+        // init Welcome RecyclerView
+        recvWelcome = findViewById(R.id.recv_welcome);
+        welcomeAdapter = new WelcomeAdapter(this);
+
+        LinearLayoutManager welcomeLayoutManager = new LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
+        );
+        recvWelcome.setLayoutManager(welcomeLayoutManager);
+        List<Welcome> welcomeList = getWelcomeData();
+        welcomeAdapter.setData(welcomeList);
+        recvWelcome.setAdapter(welcomeAdapter);
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recvWelcome);
+
+        // init Category
         recvCategory = findViewById(R.id.recv_category);
         categoryAdapter = new CategoryAdapter(this);
 
@@ -81,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
         categoryAdapter.setData(getListCategory());
         recvCategory.setAdapter(categoryAdapter);
 
-        // Khởi tạo Drawer và RecyclerView cho Book
+        // init Drawer and RecyclerView for Book
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        // Initialize views
+        // init views
         search = findViewById(R.id.search_result);
         View head = findViewById(R.id.headerFragment);
         searchEditText = head.findViewById(R.id.searchBox);
@@ -174,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerListener(){
-        // Khởi tạo các TextView trong menu
+        // init TextView in menu
         TextView itemSubjects = findViewById(R.id.itemSubjects);
         TextView itemTrending = findViewById(R.id.itemTrending);
         TextView itemLibraryExplorer = findViewById(R.id.itemLibraryExplorer);
@@ -189,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         TextView itemHelp = findViewById(R.id.itemHelp);
         TextView itemDevCenter = findViewById(R.id.itemDevCenter);
 
-        // Setup click cho các TextView
+        // Setup click for TextView
         itemSubjects.setOnClickListener(v -> {
             openWebPage("https://openlibrary.org/subjects");
         });
@@ -229,6 +254,20 @@ public class MainActivity extends AppCompatActivity {
         itemDevCenter.setOnClickListener(v -> {
             openWebPage("https://openlibrary.org/developer-center");
         });
+    }
+
+    private List<Welcome> getWelcomeData() {
+        List<Welcome> welcomeList = new ArrayList<>();
+
+        welcomeList.add(new Welcome(R.drawable.welcome1, "Read Free Library Books Online", "Millions of books available through Controlled Digital Lending"));
+        welcomeList.add(new Welcome(R.drawable.welcome2,"Set a Yearly Reading Goal", "Learn how to set a yearly reading goal and track what you read"));
+        welcomeList.add(new Welcome(R.drawable.welcome3,"Keep Track of your Favorite Books", "Organize your Books using Lists & the Reading Log"));
+        welcomeList.add(new Welcome(R.drawable.welcome4,"Try the virtual Library Explorer", "Digital shelves organized like a physical library"));
+        welcomeList.add(new Welcome(R.drawable.welcome5,"Try Fulltext Search", "Find matching results within the text of millions of books"));
+        welcomeList.add(new Welcome(R.drawable.welcome6,"Be an Open Librarian", "Dozens of ways you can help improve the library"));
+        welcomeList.add(new Welcome(R.drawable.welcome7,"Volunteer at Open Library", "Discover opportunities to improve the library"));
+        welcomeList.add(new Welcome(R.drawable.welcome8,"Send us feedback", "Your feedback will help us improve these cards"));
+        return welcomeList;
     }
 
     private List<Category> getListCategory() {

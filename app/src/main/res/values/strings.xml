@@ -5,6 +5,14 @@
     <string name="category3">History Books</string>
     <string name="category4">Magic Books</string>
 
+    <string name="title1">Rowan of Rin</string>
+    <string name="title2">The Faerie Qveene</string>
+    <string name="title3">Shanna</string>
+    <string name="title4">Wolf Tower</string>
+    <string name="title5">The hobbit</string>
+    <string name="title6">The Lord of the Rings</string>
+    <string name="title7">Game of Thrones</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

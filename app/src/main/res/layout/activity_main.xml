@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Fixed Header (no scroll) -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -26,7 +25,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Scroll content (Nav + content + footer) -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScroll"
             android:layout_width="match_parent"
@@ -39,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Nav bar -->
                 <fragment
                     android:id="@+id/navFragment"
                     android:name="com.mobile.openlibraryapp.NavFragment"
@@ -55,7 +52,6 @@
                     android:padding="8dp"
                     android:layout_marginStart="5dp"/>
 
-                <!-- Welcome -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recv_welcome"
                     android:layout_width="match_parent"
@@ -67,7 +63,6 @@
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-                <!-- Category -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recv_category"
                     android:layout_width="match_parent"
@@ -76,7 +71,6 @@
                     android:clipToPadding="false"
                     android:scrollbars="horizontal" />
 
-                <!-- Content RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
@@ -86,7 +80,6 @@
                     android:padding="8dp"
                     android:scrollbars="vertical" />
 
-                <!-- Footer -->
                 <fragment
                     android:id="@+id/footer"
                     android:name="com.mobile.openlibraryapp.FooterFragment"
@@ -98,14 +91,16 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- Dynamic Fragment  -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+    <FrameLayout
+        android:id="@+id/fragment_container1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <!-- Drawer Menu -->
     <fragment
         android:id="@+id/rightDrawer"
         android:name="com.mobile.openlibraryapp.MenuOverlay"

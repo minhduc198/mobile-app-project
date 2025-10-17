@@ -26,8 +26,9 @@ public class NavFragment extends Fragment {
         TextView browse = view.findViewById(R.id.tvBrowse);
 
         // Need to add more func
-//        myBooks.setOnClickListener(v -> {
-//        });
+        myBooks.setOnClickListener(v -> {
+            openFavouriteFragment();
+        });
 
         browse.setOnClickListener(v -> {
             showDropdown(v);
@@ -73,5 +74,16 @@ public class NavFragment extends Fragment {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra("url", url);
         startActivity(intent);
+    }
+
+    private void openFavouriteFragment() {
+        Fragment favouriteFragment = new book.FavouriteBookFragment();
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container1, favouriteFragment) // make sure this ID matches your FrameLayout in activity_main.xml
+                .addToBackStack(null)
+                .commit();
     }
 }
